@@ -23,11 +23,19 @@ public class AppProcessObject {
     @Column(nullable = false)
     private String name;
 
+    // When someone is working on the process object
+    @Column
+    private String lockedBy;
+
     @Column
     private String description;
 
     @Column
     private String comments;
+
+    @OneToMany(mappedBy = "appProcessObject", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AppProcessObjectDetail> steps = new ArrayList<>();
+
 
     public List<AppProcessObjectDetail> getSteps() {
         return steps;
@@ -36,9 +44,6 @@ public class AppProcessObject {
     public void setSteps(List<AppProcessObjectDetail> steps) {
         this.steps = steps;
     }
-
-    @OneToMany(mappedBy = "appProcessObject", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<AppProcessObjectDetail> steps = new ArrayList<>();
 
     public UUID getId() {
         return id;
@@ -54,6 +59,10 @@ public class AppProcessObject {
 
     public String getName() {
         return name;
+    }
+
+    public String getLockedBy() {
+        return lockedBy;
     }
 
     public String getDescription() {
@@ -82,5 +91,9 @@ public class AppProcessObject {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public void setLockedBy(String lockedBy) {
+        this.lockedBy = lockedBy;
     }
 }
