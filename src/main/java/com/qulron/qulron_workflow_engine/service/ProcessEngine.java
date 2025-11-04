@@ -23,10 +23,10 @@ public class ProcessEngine {
     }
 
     // Entry point by process name
-    public boolean executeProcessByName(String processName) {
+    public void executeProcessByName(String processName) {
         AppProcessObject processObject = processObjectRepo.findByName(processName)
                 .orElseThrow(() -> new RuntimeException("Process not found: " + processName));
-        return executeProcess(processObject, new ExecutionContext());
+        executeProcess(processObject, new ExecutionContext());
     }
 
     // Core recursive engine
@@ -46,7 +46,7 @@ public class ProcessEngine {
                 .sorted(Comparator.comparingInt(AppProcessObjectDetail::getSequence))
                 .toList();
 
-        AppProcessObjectDetail current = sortedSteps.get(0);
+        AppProcessObjectDetail current = sortedSteps.getFirst();
 
         while (current != null) {
             if (current.isCommentedOut()) {

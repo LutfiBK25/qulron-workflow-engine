@@ -15,7 +15,7 @@ public class DatabaseAction implements Action {
 
     @Override
     public boolean execute(ExecutionContext context) {
-        String procName = (String) context.get("procedure");
+        String procName = (String) context.getVar("procedure");
         jdbcTemplate.execute("EXEC " + procName);
         return true;
     }

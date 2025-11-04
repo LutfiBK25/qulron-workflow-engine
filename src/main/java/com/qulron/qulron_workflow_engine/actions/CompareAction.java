@@ -9,8 +9,8 @@ public class CompareAction implements Action {
 
     @Override
     public boolean execute(ExecutionContext context) {
-        Object left = context.get("left");
-        Object right = context.get("right");
+        Object left = context.getVar("left");
+        Object right = context.getVar("right");
         return left != null && left.equals(right);
     }
 }
