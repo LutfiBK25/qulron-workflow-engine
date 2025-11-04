@@ -17,21 +17,28 @@ public class AppProcessObjectDetail {
     @JoinColumn(name = "process_object_id", nullable = false)
     private AppProcessObject appProcessObject;
 
+    // Process Object version
     @Column(name = "version",nullable = false)
     private int version;
 
     @Column(name = "sequence", nullable = false)
     private int sequence;
 
+    // For fast jumping between steps
     @Column(name = "label", nullable = false)
     private String label;
 
+    // Int Refers to specific Action Type:
+    // -1 : Empty Line
+    // 0 : Return (PASS/FAIL)
+    // 1: Calculate
+    // 2: Call Process Object
+    // 3: Compare
+    // 4: Database Action
     @Column(name = "action", nullable = false)
     private int action;
 
-    @Column(name = "action_type", nullable = false)
-    private int actionType;
-
+    // the Action UUID (Act*** Entities)
     @Column(name = "action_id", nullable = false)
     private String actionId;
 
@@ -85,14 +92,6 @@ public class AppProcessObjectDetail {
 
     public void setAction(int action) {
         this.action = action;
-    }
-
-    public int getActionType() {
-        return actionType;
-    }
-
-    public void setActionType(int actionType) {
-        this.actionType = actionType;
     }
 
     public String getActionId() {
