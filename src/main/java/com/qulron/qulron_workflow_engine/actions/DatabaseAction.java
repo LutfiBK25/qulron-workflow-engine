@@ -5,7 +5,7 @@ import com.qulron.qulron_workflow_engine.engine.ExecutionContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-@Component("database_action")
+@Component("DatabaseAction")
 public class DatabaseAction implements Action {
     private final JdbcTemplate jdbcTemplate;
 

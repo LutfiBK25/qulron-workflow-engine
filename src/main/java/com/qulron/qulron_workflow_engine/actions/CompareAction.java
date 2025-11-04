@@ -4,7 +4,7 @@ import com.qulron.qulron_workflow_engine.engine.Action;
 import com.qulron.qulron_workflow_engine.engine.ExecutionContext;
 import org.springframework.stereotype.Component;
 
-@Component("compare")
+@Component("CompareAction")
 public class CompareAction implements Action {
 
     @Override

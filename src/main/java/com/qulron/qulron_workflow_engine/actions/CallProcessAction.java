@@ -7,7 +7,7 @@ import com.qulron.qulron_workflow_engine.repository.ProcessObjectRepo;
 import com.qulron.qulron_workflow_engine.service.ProcessEngine;
 import org.springframework.stereotype.Component;
 
-@Component("callProcessAction")
+@Component("CallProcessAction")
 public class CallProcessAction implements Action {
 
     private final ProcessObjectRepo processObjectRepo;
