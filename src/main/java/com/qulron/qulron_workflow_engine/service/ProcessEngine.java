@@ -4,6 +4,7 @@ import com.qulron.qulron_workflow_engine.engine.Action;
 import com.qulron.qulron_workflow_engine.engine.ExecutionContext;
 import com.qulron.qulron_workflow_engine.entity.AppProcessObject;
 import com.qulron.qulron_workflow_engine.entity.AppProcessObjectDetail;
+import com.qulron.qulron_workflow_engine.enums.ActionType;
 import com.qulron.qulron_workflow_engine.repository.ProcessObjectRepo;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -55,12 +56,24 @@ public class ProcessEngine {
             }
 
             String actionType = "";
-            switch (current.getActionType()){
-                case -1 -> {
-                    actionType = "Done";
+            switch (current.getAction()){
+                case ActionType.EMPTY -> {
+                    continue;
                 }
-                case 1 -> {
-                    actionType = "callProcessAction";
+                case ActionType.RETURN -> {
+                    actionType = "ReturnAction";
+                }
+                case ActionType.CALCULATE -> {
+                    actionType = "CalculateAction";
+                }
+                case ActionType.CALL -> {
+                    actionType = "CallProcessAction";
+                }
+                case ActionType.COMPARE -> {
+                    actionType = "CompareAction";
+                }
+                case ActionType.DATABASE -> {
+                    actionType = "DatabaseAction";
                 }
             }
 
@@ -68,7 +81,7 @@ public class ProcessEngine {
             Action action = (Action) appContext.getBean(actionType);
 
             // For CallProcessAction, we dynamically set the target process name in context
-            if (actionType.equals("callProcessAction")) {
+            if (actionType.equals("CallProcessAction")) {
                 context.setVar("targetProcessName", current.getActionId());
             }
 

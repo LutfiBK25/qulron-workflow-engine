@@ -1,6 +1,8 @@
 package com.qulron.qulron_workflow_engine.entity;
 
 
+import com.qulron.qulron_workflow_engine.enums.ActionType;
+import com.qulron.qulron_workflow_engine.utility.ActionTypeConverter;
 import jakarta.persistence.*;
 
 import java.util.UUID;
@@ -28,15 +30,9 @@ public class AppProcessObjectDetail {
     @Column(name = "label", nullable = false)
     private String label;
 
-    // Int Refers to specific Action Type:
-    // -1 : Empty Line
-    // 0 : Return (PASS/FAIL)
-    // 1: Calculate
-    // 2: Call Process Object
-    // 3: Compare
-    // 4: Database Action
+    @Convert(converter = ActionTypeConverter.class)
     @Column(name = "action", nullable = false)
-    private int action;
+    private ActionType action;
 
     // the Action UUID (Act*** Entities)
     @Column(name = "action_id", nullable = false)
@@ -86,11 +82,11 @@ public class AppProcessObjectDetail {
         this.label = label;
     }
 
-    public int getAction() {
+    public ActionType getAction() {
         return action;
     }
 
-    public void setAction(int action) {
+    public void setAction(ActionType action) {
         this.action = action;
     }
 
